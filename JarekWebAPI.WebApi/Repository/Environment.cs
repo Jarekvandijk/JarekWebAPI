@@ -13,3 +13,5 @@ public class Environment2D
     [Required]
     public float MaxLength { get; set; }
 }
+
+// pas aan naar uniqueidentifier
