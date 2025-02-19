@@ -14,7 +14,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>(options =>
 {
     options.User.RequireUniqueEmail = true;
-    options.Password.RequiredLength = 512;
+    options.Password.RequiredLength = 50;
 })
 .AddRoles<IdentityRole>()
 .AddDapperStores(options =>
@@ -28,10 +28,10 @@ builder.Services.AddOpenApi();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.MapOpenApi();
-}
+//}
 
 app.MapGet("/", () => $"The API is up -> connectionstring found: {sqlConnectionStringFound}");
 
