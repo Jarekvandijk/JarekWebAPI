@@ -3,6 +3,7 @@ using JarekWebAPI.WebApi;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using System.Linq;
+using JarekWebAPI.Repositories;
 
 [ApiController]
 [Route("Environment2D")]
@@ -33,13 +34,11 @@ public class Environment2DController : ControllerBase
         }
 	};
 
-
- //   private readonly ILogger<Object2DController> _logger;
-
- //   public Environment2DController(ILogger<Object2DController> logger)
-	//{
-	//	_logger = logger;
-	//}
+    private readonly IEnvironment2DRepository _environment2DRepository;
+    public Environment2DController(IEnvironment2DRepository environment2DRepository)
+    {
+        _environment2DRepository = environment2DRepository;
+    }
 
     [HttpGet(Name = "GetAllEnvironments")]
     public ActionResult<IEnumerable<Environment2D>> GetAll()
@@ -90,28 +89,6 @@ public class Environment2DController : ControllerBase
         environments.Remove(environment);
         return Ok();
     }
-
-
-    //[TestMethod]
-    //public async Task Add_AddEnvironmentToUserWithMaxNumberOfEnvironments_ReturnsBadRequest()
-    //{
-    //    // Arrange
-    //    var currentUserId
-    //    var newEnvironment = new Environment2D();
-    //    List<Environment2D> existingUserEnvironments = newList<Environment2D>[new Environment2D(), new Environment2D(), new Environment2D(), new Environment2D(), new Environment2D()];
-    //    Mock<IEnvironmentRepository> EnvironmentRepository = new Mock<IEnvironmentRepository>();
-    //    Mock<IObjectRepository> objectRepository = new Mock<IObjectRepository>();
-    //    Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
-
-       
-    //    // Create user
-    //    userRepository.Setup(x => x.GetCurrentUserId()).Returns(currentUserId);
-    //    // Create number of random environments
-    //    // environmentRepository.Setup(x => x.ReadByOwnerId(currentUserId)).ReturnsAsync()
-    //    var environmentController = new EnvironmentController();
-
-    //    // Act 
-    //}
 }
 
 

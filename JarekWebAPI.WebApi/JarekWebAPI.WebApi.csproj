@@ -5,7 +5,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>ab69ca9c-f29f-4630-9a93-94bb9b05404c</UserSecretsId>
+    <AppDesignerFolder>Models</AppDesignerFolder>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Models\launchSettings.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avans.Identity.DapperOrm" Version="1.0.3" />

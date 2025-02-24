@@ -104,9 +104,7 @@ using JarekWebAPI.WebApi;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-
-
-///* 
+ 
 [TestClass]
 
 public class EnvironmentControllerTests
@@ -126,8 +124,7 @@ public class EnvironmentControllerTests
 
         environmentRepository.Setup(t => t.ReadAsync(id)).ReturnsAsync(new Environment2D()); // Change when ready with repository 
 
-        var controller = new Environment2DController(); 
-
+        var controller = new Environment2DController(environmentRepository.Object); 
 
 
         // Act 
