@@ -6,7 +6,7 @@ using Dapper;
 
 namespace JarekWebAPI.Repositories
 {
-    public class Object2DRepository
+    public class Object2DRepository : IObject2DRepository
     {
         private readonly string sqlConnectionString;
 

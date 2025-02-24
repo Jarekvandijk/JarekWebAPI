@@ -12,49 +12,39 @@ public class Environment2DController : ControllerBase
 	{
 		new Environment2D()
 		{
-         
 			Id = 1,
-		
 			Name = "Vierkant",
- 
 			MaxHeight = 4,
-    
 			MaxLength = 4
 		},
 		new Environment2D()
 		{
             Id = 2,
-
             Name = "Rondje",
-
             MaxHeight = 3,
-
             MaxLength = 3
         },
 		new Environment2D()
 		{
             Id = 3,
-
             Name = "Rechthoek",
-
             MaxHeight = 5,
-
             MaxLength = 8
         }
 	};
 
 
-	private readonly ILogger<Object2DController> _logger;
+ //   private readonly ILogger<Object2DController> _logger;
 
-	public Environment2DController(ILogger<Object2DController> logger)
-	{
-		_logger = logger;
-	}
+ //   public Environment2DController(ILogger<Object2DController> logger)
+	//{
+	//	_logger = logger;
+	//}
 
     [HttpGet(Name = "GetAllEnvironments")]
     public ActionResult<IEnumerable<Environment2D>> GetAll()
     {
-        return environments;
+        return Ok(environments);
     }
 
     [HttpGet("{id}", Name = "GetEnvironmentById")]

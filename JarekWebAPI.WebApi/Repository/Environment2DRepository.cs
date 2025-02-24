@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JarekWebAPI.Repositories
 {
-    public class Environment2DRepository
+    public class Environment2DRepository : IEnvironment2DRepository
     {
         private readonly string sqlConnectionString;
 
