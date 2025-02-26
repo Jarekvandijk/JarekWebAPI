@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using System.Linq;
 using JarekWebAPI.Repositories;
+using Microsoft.AspNetCore.Authentication;
 
 [ApiController]
 [Route("Environment2D")]
@@ -35,6 +36,7 @@ public class Environment2DController : ControllerBase
 	};
 
     private readonly IEnvironment2DRepository _environment2DRepository;
+
     public Environment2DController(IEnvironment2DRepository environment2DRepository)
     {
         _environment2DRepository = environment2DRepository;

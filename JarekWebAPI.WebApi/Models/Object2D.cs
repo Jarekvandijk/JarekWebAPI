@@ -4,7 +4,6 @@ namespace JarekWebAPI.WebApi;
 
 public class Object2D
 {
-    [Required]
     public int Id { get; set; }
     [Required]
     public int PrefabId { get; set; }
