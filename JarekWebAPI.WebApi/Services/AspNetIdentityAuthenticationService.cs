@@ -20,4 +20,5 @@ public class AspNetIdentityAuthenticationService : IAuthenticationService
         // Returns the aspnet_User.Id of the authenticated user
         return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
     }
+
 }
