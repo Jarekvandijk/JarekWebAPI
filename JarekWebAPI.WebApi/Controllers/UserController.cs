@@ -6,16 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JarekWebAPI.WebApi.Repository;
 
 [ApiController]
 [Route("UserAccounts")]
 public class UserController : ControllerBase
 {
-    private readonly IUserAccountRepository _userAccountRepository;
+    private readonly IAccountUserRepository _userAccountRepository;
     private readonly ILogger<UserController> _logger;
     private static List<AccountUser> _accountUsers = new List<AccountUser>();
 
-    public UserController(IUserAccountRepository userAccountRepository, ILogger<UserController> logger)
+    public UserController(IAccountUserRepository userAccountRepository, ILogger<UserController> logger)
     {
         _userAccountRepository = userAccountRepository;
         _logger = logger;
