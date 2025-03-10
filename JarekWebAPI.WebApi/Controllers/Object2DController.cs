@@ -1,106 +1,129 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using JarekWebAPI.WebApi;
-using Microsoft.Extensions.Hosting;
+﻿//using Microsoft.AspNetCore.Mvc;
+//using JarekWebAPI.Repositories;
+//using System.Collections.Generic;
+//using System.Threading.Tasks;
+//using JarekWebAPI.WebApi;
+
+//[ApiController]
+//[Route("Object2D")]
+//public class Object2DController : ControllerBase
+//{
+//    private readonly IObject2DRepository _object2DRepository;
+
+//    public Object2DController(IObject2DRepository object2DRepository)
+//    {
+//        _object2DRepository = object2DRepository;
+//    }
+
+//    [HttpGet(Name = "GetAllObjects")]
+//    public async Task<ActionResult<IEnumerable<Object2D>>> GetAll()
+//    {
+//        var objects = await _object2DRepository.ReadAllAsync();
+//        return Ok(objects);
+//    }
+
+//    [HttpGet("{id}", Name = "GetObjectById")]
+//    public async Task<ActionResult<Object2D>> GetById(Guid id)
+//    {
+//        var obj = await _object2DRepository.ReadAsync(id);
+//        if (obj == null)
+//            return NotFound();
+//        return Ok(obj);
+//    }
+
+//    [HttpPost(Name = "CreateObject")]
+//    public async Task<ActionResult> Create(Object2D obj)
+//    {
+//        var createdObject = await _object2DRepository.InsertAsync(obj);
+//        return CreatedAtRoute("GetObjectById", new { id = createdObject.Id }, createdObject);
+//    }
+
+//    [HttpPut("{id}", Name = "UpdateObject")]
+//    public async Task<IActionResult> Update(Guid id, Object2D updatedObject)
+//    {
+//        var existingObject = await _object2DRepository.ReadAsync(id);
+//        if (existingObject == null)
+//            return NotFound();
+
+//        updatedObject.Id = id;
+//        await _object2DRepository.UpdateAsync(updatedObject);
+//        return Ok(updatedObject);
+//    }
+
+//    [HttpDelete("{id}", Name = "DeleteObject")]
+//    public async Task<IActionResult> Delete(Guid id)
+//    {
+//        var existingObject = await _object2DRepository.ReadAsync(id);
+//        if (existingObject == null)
+//            return NotFound();
+
+//        await _object2DRepository.DeleteAsync(id);
+//        return Ok();
+//    }
+//}
+using Microsoft.AspNetCore.Mvc;
+using JarekWebAPI.Repositories;
 using System.Collections.Generic;
-using System.Linq;
-using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
+using JarekWebAPI.WebApi;
 
 [ApiController]
 [Route("Object2D")]
 public class Object2DController : ControllerBase
 {
-    private static List<Object2D> objects = new List<Object2D>()
+    private readonly IObject2DRepository _object2DRepository;
+    private static List<Object2D> _objects = new List<Object2D>();
+
+    public Object2DController(IObject2DRepository object2DRepository)
     {
-        new Object2D()
-        {
-            Id = 1,         
-            PrefabId = 1,
-            PositionX = 1.5f,
-            PositionY = 3f,  
-            ScaleX = 2f,
-            ScaleY = 2f,
-            SortingLayer = 3
-        },
-        new Object2D()
-        {
-            Id = 2,
-            PrefabId = 2,
-            PositionX = 5f,
-            PositionY = 2f,
-            ScaleX = 1f,
-            ScaleY = 1f,
-            SortingLayer = 2
-        },
-        new Object2D()
-        {
-            Id = 3,
-            PrefabId = 3,
-            PositionX = 0f,
-            PositionY = 0f,
-            ScaleX = 1f,
-            ScaleY = 1f,
-            SortingLayer = 1
-        }
-    };
-
-
-    private readonly ILogger<Object2DController> _logger;
-
-    public Object2DController(ILogger<Object2DController> logger)
-    {
-        _logger = logger;
+        _object2DRepository = object2DRepository;
     }
 
     [HttpGet(Name = "GetAllObjects")]
-    public ActionResult<IEnumerable<Object2D>> GetAll()
+    public async Task<ActionResult<IEnumerable<Object2D>>> GetAll()
     {
-        return objects;
+        var objects = await _object2DRepository.ReadAllAsync();
+        return Ok(objects);
     }
 
     [HttpGet("{id}", Name = "GetObjectById")]
-    public ActionResult<Object2D> GetById(int id)
+    public async Task<ActionResult<Object2D>> GetById(Guid id)
     {
-        var obj = objects.FirstOrDefault(o => o.Id == id);
+        var obj = await _object2DRepository.ReadAsync(id);
         if (obj == null)
             return NotFound();
-        return obj;
+        return Ok(obj);
     }
 
     [HttpPost(Name = "CreateObject")]
-    public ActionResult Create(Object2D obj)
+    public async Task<ActionResult> Create(Object2D obj)
     {
-        if (objects.Any(o => o.Id == obj.Id))
-            return BadRequest("Object with this ID already exists.");
-
-        objects.Add(obj);
-        return CreatedAtRoute("GetObjectById", new { id = obj.Id }, obj);
+        var createdObject = await _object2DRepository.InsertAsync(obj);
+        _objects.Add(createdObject);
+        return CreatedAtRoute("GetObjectById", new { id = createdObject.Id }, createdObject);
     }
 
     [HttpPut("{id}", Name = "UpdateObject")]
-    public IActionResult Update(int id, Object2D updatedObject)
+    public async Task<IActionResult> Update(Guid id, Object2D updatedObject)
     {
-        var existingObject = objects.FirstOrDefault(o => o.Id == id);
+        var existingObject = await _object2DRepository.ReadAsync(id);
         if (existingObject == null)
             return NotFound();
 
-        existingObject.PrefabId = updatedObject.PrefabId;
-        existingObject.PositionX = updatedObject.PositionX;
-        existingObject.PositionY = updatedObject.PositionY;
-        existingObject.ScaleX = updatedObject.ScaleX;
-        existingObject.ScaleY = updatedObject.ScaleY;
-        existingObject.SortingLayer = updatedObject.SortingLayer;
-
-        return Ok();
+        updatedObject.Id = id;
+        await _object2DRepository.UpdateAsync(updatedObject);
+        return Ok(updatedObject);
     }
 
     [HttpDelete("{id}", Name = "DeleteObject")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(Guid id)
     {
-        var obj = objects.FirstOrDefault(o => o.Id == id);
-        if (obj == null)
+        var existingObject = await _object2DRepository.ReadAsync(id);
+        if (existingObject == null)
             return NotFound();
 
-        objects.Remove(obj);
+        await _object2DRepository.DeleteAsync(id);
+        _objects.RemoveAll(o => o.Id == id);
         return Ok();
     }
 }

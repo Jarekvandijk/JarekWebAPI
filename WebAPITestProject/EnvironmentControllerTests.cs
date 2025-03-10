@@ -19,7 +19,7 @@ public class EnvironmentControllerTests
         var authenticationService = new Mock<IAuthenticationService>();
 
         //var currenentUserId = Guid.NewGuid().ToString();
-        var id = 10;
+        var id = Guid.NewGuid();
         authenticationService.Setup(t => t.GetCurrentAuthenticatedUserId()).Returns(Guid.NewGuid().ToString());
 
         environmentRepository.Setup(t => t.ReadAsync(id)).ReturnsAsync(new Environment2D());

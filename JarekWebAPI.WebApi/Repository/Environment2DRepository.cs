@@ -24,7 +24,7 @@ namespace JarekWebAPI.Repositories
             }
         }
 
-        public async Task<Environment2D?> ReadAsync(int id)
+        public async Task<Environment2D?> ReadAsync(Guid id)
         {
             using (var sqlConnection = new SqlConnection(sqlConnectionString))
             {
@@ -53,7 +53,7 @@ namespace JarekWebAPI.Repositories
             }
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             using (var sqlConnection = new SqlConnection(sqlConnectionString))
             {
