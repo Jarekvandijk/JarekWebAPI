@@ -33,7 +33,7 @@ public class UserController : ControllerBase
     public async Task<ActionResult<AccountUser>> GetById(Guid id)
     {
         var userAccount = await _userAccountRepository.ReadAsync();
-        var account = userAccount.FirstOrDefault(u => u.ID == id);
+        var account = userAccount.FirstOrDefault(u => u.Id == id);
         if (account == null)
             return NotFound("User account not found.");
 
@@ -50,7 +50,7 @@ public class UserController : ControllerBase
         var createdAccount = await _userAccountRepository.InsertAsync(userAccount);
         _accountUsers.Add(createdAccount);
 
-        return CreatedAtRoute("GetUserAccountById", new { id = createdAccount.ID }, createdAccount);
+        return CreatedAtRoute("GetUserAccountById", new { id = createdAccount.Id }, createdAccount);
     }
 
     [HttpPut("{id:guid}", Name = "UpdateUserAccount")]
