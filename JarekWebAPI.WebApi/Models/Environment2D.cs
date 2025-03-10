@@ -6,7 +6,7 @@ public class Environment2D
 {
     public Guid Id { get; set; }
     [Required]
-    public string Name { get; set; }
+    public required string Name { get; set; }
     [Required]
     public float MaxHeight { get; set; }
     [Required]
