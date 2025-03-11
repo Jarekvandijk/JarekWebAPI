@@ -6,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 
-var sqlConnectionString? = builder.Configuration.GetValue<string>("SqlConnectionString");
+var sqlConnectionString = builder.Configuration.GetValue<string>("SqlConnectionString")
+?? throw new InvalidOperationException("SqlConnectionString is missing from configuration.");
 var sqlConnectionStringFound = !string.IsNullOrWhiteSpace(sqlConnectionString);
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
