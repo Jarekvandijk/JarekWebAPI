@@ -225,7 +225,8 @@ public class UserController : ControllerBase
         accountUsers.Add(createdAccount);
 
         //return CreatedAtRoute("GetUserAccountById", new { id = createdAccount.Id }, createdAccount);
-        return Created();
+        //return Created();
+        return Ok(createdAccount); 
     }
 
     //[HttpPost(Name = "CreateUserAccount")]
