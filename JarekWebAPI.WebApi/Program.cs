@@ -1,4 +1,5 @@
 using JarekWebAPI.Repositories;
+using JarekWebAPI.WebApi.Repository;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 
-var sqlConnectionString = builder.Configuration.GetValue<string>("SqlConnectionString")
-?? throw new InvalidOperationException("SqlConnectionString is missing from configuration.");
+//var sqlConnectionString = builder.Configuration.GetValue<string>("SqlConnectionString")
+//?? throw new InvalidOperationException("SqlConnectionString is missing from configuration.");
+var sqlConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("SqlConnectionString is missing from configuration.");
 var sqlConnectionStringFound = !string.IsNullOrWhiteSpace(sqlConnectionString);
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
@@ -17,6 +20,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<IAuthenticationService, AspNetIdentityAuthenticationService>();
 builder.Services.AddTransient<IEnvironment2DRepository, Environment2DRepository>(o => new Environment2DRepository(sqlConnectionString));
 builder.Services.AddTransient<IObject2DRepository, Object2DRepository>(o => new Object2DRepository(sqlConnectionString));
+builder.Services.AddTransient<IAccountUserRepository, AccountUserRepository>(o => new AccountUserRepository(sqlConnectionString));
+
+
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>(options =>
 {
