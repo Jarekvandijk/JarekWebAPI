@@ -20,7 +20,7 @@ namespace JarekWebAPI.Repositories
         {
             using (var sqlConnection = new SqlConnection(sqlConnectionString))
             {
-                var objectId = await sqlConnection.ExecuteAsync("INSERT INTO [Object2D] (Id, PrefabId, PositionX, PositionY, ScaleX, ScaleY, SortingLayer) VALUES (@Id, @PrefabId, @PositionX, @PositionY, @ScaleX, @ScaleY, @SortingLayer)", obj);
+                var objectId = await sqlConnection.ExecuteAsync("INSERT INTO [Object2D] (EnvironmentId, Id, PrefabId, PositionX, PositionY, ScaleX, ScaleY, SortingLayer) VALUES (@EnvironmentId, @Id, @PrefabId, @PositionX, @PositionY, @ScaleX, @ScaleY, @SortingLayer)", obj);
                 return obj;
             }
         }
