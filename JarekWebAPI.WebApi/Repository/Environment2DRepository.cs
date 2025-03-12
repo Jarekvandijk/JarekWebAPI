@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using JarekWebAPI.WebApi;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using JarekWebAPI.WebApi.Repository;
 
 namespace JarekWebAPI.Repositories
 {

@@ -15,9 +15,6 @@
 //    }
 //}
 
-
-
-
 namespace JarekWebAPI.WebApi.Repository
 {
     public interface IAccountUserRepository
@@ -28,5 +25,6 @@ namespace JarekWebAPI.WebApi.Repository
         Task<AccountUser?> ReadAsync(string username);    
         Task<AccountUser?> ReadAsync(Guid id);
         Task UpdateAsync(AccountUser accountUser);
+        Task<AccountUser?> CheckUserCredentialsAsync(string username, string password);
     }
 }

@@ -62,10 +62,10 @@
 //    }
 //}
 using Microsoft.AspNetCore.Mvc;
-using JarekWebAPI.Repositories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using JarekWebAPI.WebApi;
+using JarekWebAPI.WebApi.Repository;
 
 [ApiController]
 [Route("Object2D")]

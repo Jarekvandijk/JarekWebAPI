@@ -1,6 +1,4 @@
-﻿using JarekWebAPI.WebApi;
-
-namespace JarekWebAPI.Repositories
+﻿namespace JarekWebAPI.WebApi.Repository
 {
     public interface IObject2DRepository
     {

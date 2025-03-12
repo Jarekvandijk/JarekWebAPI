@@ -277,6 +277,24 @@ public class UserController : ControllerBase
         return Ok();
     }
 
+    [HttpGet("Login", Name = "LoginUserAccount")]
+    public async Task<ActionResult<AccountUser>> Login(string username, string password)
+    {
+        var userAccount = await _userAccountRepository.ReadAsync(username);
+
+        if (userAccount == null)
+        {
+            return NotFound("User account not found.");
+        }
+
+        if (userAccount.Password != password)
+        {
+            return BadRequest("Invalid password.");
+        }
+
+        return Ok(userAccount);
+    }
+
     private async Task<AccountUser> GetAccountUser(string username)
     {
         var result = await _userAccountRepository.ReadAsync(username); 

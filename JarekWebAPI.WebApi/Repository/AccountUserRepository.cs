@@ -134,7 +134,16 @@ namespace JarekWebAPI.Repositories
         {
             using (var sqlConnection = new SqlConnection(sqlConnectionString))
             {
-                return await sqlConnection.QuerySingleOrDefaultAsync<AccountUser>("SELECT * FROM [UserAccount] WHERE UserName = @UserName", new { username }); 
+                return await sqlConnection.QuerySingleOrDefaultAsync<AccountUser>("SELECT * FROM [AccountUser] WHERE UserName = @UserName", new { username }); 
+            }
+        }
+
+        public async Task<AccountUser?> CheckUserCredentialsAsync(string username, string password)
+        {
+            using (var sqlConnection = new SqlConnection(sqlConnectionString))
+            {
+                var query = "SELECT * FROM [AccountUser] WHERE UserName = @UserName AND Password = @Password";
+                return await sqlConnection.QuerySingleOrDefaultAsync<AccountUser>(query, new { username, password });
             }
         }
     }
